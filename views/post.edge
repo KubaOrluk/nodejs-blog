@@ -30,6 +30,51 @@
       </div>
     </article>
 
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          @each(comment in comments)
+            <div class="comment-preview">
+              <a href="/comment/{{ comment._id }}">
+              </a>
+              <p class="comment-meta">Posted by
+                <a href="#">{{ comment.username }}</a>
+                on {{ comment.createdAt.toDateString() }}
+                {{ comment.content }}
+              </p>
+            </div>
+            <hr>
+          @endeach
+          <!-- Pager -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <form action="/comments/store" method="POST" encType="multipart/form-data">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" class="form-control">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Content</label>
+                <textarea name="content" placeholder="Content ..." cols="30" rows="10" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="form-group my-4 text-center">
+              <button class="btn btn-primary">Create Comment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <hr>
 @endsection 
  

@@ -21,6 +21,9 @@ const storePost = require('./middleware/storePost');
 const auth = require("./middleware/auth");
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
 
+const storeComment = require('./middleware/storeComment');
+const storeCommentController = require('./controllers/storeComment');
+const getCommentController = require('./controllers/getComment');
 
 const app = new express();
 
@@ -54,6 +57,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/posts/store', storePost)
+app.use('/comments/store', storeComment)
 
 app.get("/", homePageController);
 app.get("/post/:id", getPostController);
@@ -63,7 +67,11 @@ app.get("/auth/login", redirectIfAuthenticated, loginController);
 app.post("/users/login", redirectIfAuthenticated, loginUserController);
 app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
-app.get("/auth/logout", redirectIfAuthenticated, logoutController);
+app.get("/auth/logout", logoutController);
+
+app.get("/comment/:id", getCommentController);
+app.post("/comments/store", auth, storeComment, storeCommentController);
+
 
 app.listen(4000, () => {
   console.log("App listening on port 4000");
