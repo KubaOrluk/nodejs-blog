@@ -23,6 +23,7 @@ const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
 
 const storeComment = require('./middleware/storeComment');
 const storeCommentController = require('./controllers/storeComment');
+const commentsController = require('./controllers/comments');
 const getCommentController = require('./controllers/getComment');
 
 const app = new express();
@@ -69,6 +70,7 @@ app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", logoutController);
 
+app.get("/post/:id", commentsController);
 app.get("/comment/:id", getCommentController);
 app.post("/comments/store", auth, storeComment, storeCommentController);
 
