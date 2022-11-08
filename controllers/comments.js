@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
         post.comments.unshift(comment);
         return post.save();
     })
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('back'))
     .catch((err) => {
         console.log(err);
     });
