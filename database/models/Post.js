@@ -9,7 +9,8 @@ const PostSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: new Date()
-    }
+    },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
 const Post = mongoose.model('Post', PostSchema);

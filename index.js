@@ -11,6 +11,7 @@ const connectFlash = require("connect-flash");
 const createPostController = require('./controllers/createPost');
 const homePageController = require('./controllers/homePage');
 const storePostController = require('./controllers/storePost');
+const storeCommentController = require('./controllers/comments');
 const getPostController = require('./controllers/getPost');
 const createUserController = require("./controllers/createUser");
 const storeUserController = require('./controllers/storeUser');
@@ -20,12 +21,6 @@ const logoutController = require("./controllers/logout");
 const storePost = require('./middleware/storePost');
 const auth = require("./middleware/auth");
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
-
-const storeComment = require('./middleware/storeComment');
-const storeCommentController = require('./controllers/storeComment');
-const commentsController = require('./controllers/comments');
-const getCommentController = require('./controllers/getComment');
-
 const app = new express();
 
 mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true })
@@ -58,10 +53,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/posts/store', storePost)
-app.use('/comments/store', storeComment)
 
 app.get("/", homePageController);
 app.get("/post/:id", getPostController);
+app.post("/post/:id/comments", auth, storeCommentController);
 app.get("/posts/new", auth, createPostController);
 app.post("/posts/store", auth, storePost, storePostController);
 app.get("/auth/login", redirectIfAuthenticated, loginController);
@@ -69,11 +64,6 @@ app.post("/users/login", redirectIfAuthenticated, loginUserController);
 app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", logoutController);
-
-app.get("/post/:id", commentsController);
-app.get("/comment/:id", getCommentController);
-app.post("/comments/store", auth, storeComment, storeCommentController);
-
 
 app.listen(4000, () => {
   console.log("App listening on port 4000");
