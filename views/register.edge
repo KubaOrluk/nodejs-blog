@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Page Header -->
-<header class="masthead">
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -19,7 +19,9 @@
 @if(errors.length > 0)
   <ul class="list-group">
     @each(error in errors)
-      <li class="list-group-item text-danger">{{ error }}</li>
+      <center>
+      <li style="color:red;list-style: none">{{ error }}</li>
+      </center>
     @endeach
   </ul>
 @endif

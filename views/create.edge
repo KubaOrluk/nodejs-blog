@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Page Header -->
-<header class="masthead">
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -14,6 +14,16 @@
     </div>
   </div>
 </header>
+
+@if(errors.length > 0)
+  <ul class="list-group">
+    @each(error in errors)
+      <center>
+      <li style="color:red;list-style: none">{{ error }}</li>
+      </center>
+    @endeach
+  </ul>
+@endif
 
 <div class="container">
   <div class="row">
@@ -42,9 +52,6 @@
             <label>Content</label>
             <textarea name="content" placeholder="Content..." cols="30" rows="10" class="form-control"></textarea>
           </div>
-        </div>
-        <div class="form-group mt-3">
-          <input type="file" name="image" class="form-control-file">
         </div>
         <div class="form-group my-4 text-center">
           <button class="btn btn-primary">Create Post</button>
