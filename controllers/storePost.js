@@ -1,15 +1,14 @@
 const path = require('path')
 const Post = require('../database/models/Post')
 
-module.exports = (req, res) => {
-    Post.create(req.body, (error, post) => {
-        if (error) {
-            const postErrors = Object.keys(error.errors).map(key => error.errors[key].message)
+module.exports = async (req, res) => {
+    const post = new Post(req.body);
 
-            req.flash('postErrors', postErrors)
-            return res.redirect('/posts/new')
-        }
-        res.redirect('/')
-    })
+    post.username = req.session.username;
+  
+    post
+    .save()
+    
+    return res.redirect(`/post/${post._id}`);
 }
 

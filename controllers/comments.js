@@ -4,6 +4,7 @@ const Comment = require('../database/models/Comment');
 module.exports = async (req, res) => {
     // INSTANTIATE INSTANCE OF MODEL
     const comment = new Comment(req.body);
+    comment.commentUsername = req.session.username;
 
     // SAVE INSTANCE OF Comment MODEL TO DB
     comment
