@@ -18,10 +18,15 @@ module.exports = (req, res) => {
                     req.session.username = user.username
                     res.redirect('/')
                 } else {
+                    const loginErrors = 'Incorrect password'
+                    req.flash('loginErrors', loginErrors)
                     res.redirect('/auth/login')
                 }
             })
-        } else {
+        }
+        else {
+            const loginErrors = 'User does not exist'
+            req.flash('loginErrors', loginErrors)
             return res.redirect('/auth/login')
         }
     })

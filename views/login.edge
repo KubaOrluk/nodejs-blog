@@ -15,6 +15,16 @@
   </div>
 </header>
 
+@if(errors.length > 0)
+  <ul class="list-group">
+    @each(error in errors)
+      <center>
+      <li style="color:red;list-style: none">{{ error }}</li>
+      </center>
+    @endeach
+  </ul>
+@endif
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
