@@ -20,7 +20,7 @@
     "express-edge": "^2.0.2",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
-    "mongoose": "^6.7.1",
+    "mongoose": "^6.7.2",
     "mongoose-custom-validators": "^0.0.4",
     "nodemon": "^2.0.20",
     "startbootstrap-clean-blog": "^6.0.8"

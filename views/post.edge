@@ -40,6 +40,13 @@
             <h2 class="comment-header">Comments</h2>
                 @each(comment in post.comments)
                   <p>{{comment.commentContent}} - Commented by {{comment.commentUsername}}</p>
+                  @if(authadmin)
+                  <form action="/post/{{ post.id }}/delete/{{ comment.id }}" method="POST" encType="multipart/form-data">
+                    <div class="form-group my-4 text-center">
+                    <button class="btn btn-danger">Delete</button>
+                    </div>
+                  </form>
+                  @endif
                 @endeach
           </div>
         </div>
@@ -47,8 +54,11 @@
     </article>
 
     <hr>
+    @if(authadmin)
+    JEtem adminem i bardzo to lubię...
+    @endif
 
-    @if(auth)
+    @if(auth || authadmin)
     <div class="container">
       <div class="row">
         <div class="col-md-8 offset-md-2">

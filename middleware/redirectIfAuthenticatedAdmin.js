@@ -1,7 +1,7 @@
-const User = require('../database/models/User')
+const Admin = require('../database/models/Admin')
 
 module.exports = (req, res, next) => {
-    if (req.session.userId) {
+    if (req.session.adminId) {
         return res.redirect('/')
     }
 

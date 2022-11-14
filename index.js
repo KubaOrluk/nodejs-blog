@@ -20,7 +20,15 @@ const loginUserController = require('./controllers/loginUser');
 const logoutController = require("./controllers/logout");
 const storePost = require("./middleware/storePost");
 const auth = require("./middleware/auth");
+
+
+const loginaController = require("./controllers/loginA");
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
+const loginAdminController = require('./controllers/loginAdmin');
+const redirectIfAuthenticatedAdmin = require('./middleware/redirectIfAuthenticatedAdmin')
+const deleteCommnetCotroller = require('./controllers/deletecomment')
+const authadmin = require("./middleware/authadmin");
+
 const app = new express();
 
 mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true })
@@ -46,6 +54,7 @@ app.set('views', __dirname + '/views');
 
 app.use('*', (req, res, next) => {
     edge.global('auth', req.session.userId)
+    edge.global('authadmin', req.session.adminId)
     next()
 });
 
@@ -64,6 +73,10 @@ app.post("/users/login", redirectIfAuthenticated, loginUserController);
 app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", logoutController);
+app.get("/adminlogin", redirectIfAuthenticatedAdmin, loginaController);
+app.post("/adminlogin", redirectIfAuthenticatedAdmin, loginAdminController);
+//admin tylko deletuje
+app.post("/post/:id/delete/:comment_id", authadmin, deleteCommnetCotroller);
 
 app.listen(4000, () => {
   console.log("App listening on port 4000");
