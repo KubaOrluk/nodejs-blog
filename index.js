@@ -25,8 +25,9 @@ const auth = require("./middleware/auth");
 const loginaController = require("./controllers/loginA");
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
 const loginAdminController = require('./controllers/loginAdmin');
-const redirectIfAuthenticatedAdmin = require('./middleware/redirectIfAuthenticatedAdmin')
-const deleteCommnetCotroller = require('./controllers/deletecomment')
+const redirectIfAuthenticatedAdmin = require('./middleware/redirectIfAuthenticatedAdmin');
+const deleteCommnetController = require('./controllers/deletecomment');
+const deletePostController = require('./controllers/deletepost');
 const authadmin = require("./middleware/authadmin");
 
 const app = new express();
@@ -73,10 +74,14 @@ app.post("/users/login", redirectIfAuthenticated, loginUserController);
 app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", logoutController);
+
+
 app.get("/adminlogin", redirectIfAuthenticatedAdmin, loginaController);
 app.post("/adminlogin", redirectIfAuthenticatedAdmin, loginAdminController);
 //admin tylko deletuje
-app.post("/post/:id/delete/:comment_id", authadmin, deleteCommnetCotroller);
+app.post("/post/:id/delete/:comment_id", authadmin, deleteCommnetController);
+app.post("/post/deletepost/:id/", authadmin, deletePostController);
+
 
 app.listen(4000, () => {
   console.log("App listening on port 4000");

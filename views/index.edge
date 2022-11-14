@@ -27,6 +27,13 @@
               {{ post.title }}
             </h2>
           </a>
+              @if(authadmin)
+              <form action="/post/deletepost/{{ post.id }}" method="POST" encType="multipart/form-data">
+                <div class="form-group my-4 text-center">
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </form>
+              @endif
           <p class="post-meta">Posted by
             <a href="#">{{ post.username }}</a>
             on {{ post.createdAt.toDateString() }}
