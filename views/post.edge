@@ -55,12 +55,34 @@
 
     <hr>
 
-    @if(auth || authadmin)
+    @if(auth)
     <div class="container">
       <div class="row">
         <div class="col-md-8 offset-md-2">
           <h2 class="comment-header">Create a comment</h2>
-          <form action="/post/{{ post.id }}/comments" method="POST" encType="multipart/form-data">
+          <form action="/post/{{ post.id }}comments" method="POST" encType="multipart/form-data">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Content</label>
+                <textarea name="commentContent" placeholder="Post a comment..." cols="30" rows="10" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="form-group my-4 text-center">
+              <button class="btn btn-primary">Create Comment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <hr>
+    @endif
+
+    @if(authadmin)
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h2 class="comment-header">Create a comment</h2>
+          <form action="/post/{{ post.id }}/commentsAdmin" method="POST" encType="multipart/form-data">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Content</label>
