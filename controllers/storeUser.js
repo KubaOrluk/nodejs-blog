@@ -4,7 +4,7 @@ module.exports = (req, res) => {
     User.create(req.body, (error, user) => {
         if (error) {
             if(!error.errors){
-                registrationErrors = 'User with this e-mail already exists'
+                registrationErrors = 'User with those credentials already exist'
             }
             else{
                 registrationErrors = Object.keys(error.errors).map(key => error.errors[key].message)
